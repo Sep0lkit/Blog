@@ -59,8 +59,8 @@ Struts2漏洞的影响大家都懂的, 通过URL直接远程命令执行, 想打
 #### 0x04 Struts2在Bool型SSRF中的利用
 下面是S2-016的POC:
 
-	`/action.action:%25{3*4}`
-	`/action.action?redirect:%25{3*4}`
+	/action.action:%25{3*4}
+	/action.action?redirect:%25{3*4}
 
 通过对连个POC的理解, 我们知道下面的POC中的redirect是实现URL跳转, 通过URL跳转来验证S2-016漏洞.
 ![Struts2-redirect](./Res/Struts2-redirect.png)
