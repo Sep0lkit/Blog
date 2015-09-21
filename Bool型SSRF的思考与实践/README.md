@@ -17,9 +17,9 @@ Wooyun上有很多SSRF典型的案例, 可以说让人拍案惊奇. 但是没有
 
 	内网探测->应用识别->攻击Payload->Payload Result
 
-	1. 内网探测: 内网主机信息收集
-	2. 应用识别: 主机应用识别(可以通过Barner和应用指纹进行识别)
-	3. 攻击Payload: 根据应用识别的应用,加载不同的攻击Payload(最常用莫属于Struts2)
-	4. Payload Result: 返回相应Payload的执行信息
+1. 内网探测: 内网主机信息收集
+2. 应用识别: 主机应用识别(可以通过Barner和应用指纹进行识别)
+3. 攻击Payload: 根据应用识别的应用,加载不同的攻击Payload(最常用莫属于Struts2)
+4. Payload Result: 返回相应Payload的执行信息
 
 #### 0x02 两者之间的区别
