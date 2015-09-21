@@ -27,14 +27,17 @@ BOOL型SSRF与一般的SSRF的区别在步骤二应用识别, 步骤三攻击Pay
 
 #### 0x03 Bool型SSRF利用方法
 1. 应用识别
+
 	{ 指纹1 + 指纹2 + 黑指纹 }
+
 以JBOSS为例: { /jmx-console/ + /invoker/JMXInvokerServlet + /d2z341.d#211 }
 
-指纹1 和 指纹2 为应用识别指纹, 准确率越高越好. 黑指纹其实就是不会匹配任何应用的指纹，一般用较长的字符串代替即可. 分别用指纹1, 指纹2 和 黑指纹对内网主机探测统计, 获取三个主机列表: jmx-console.host(A) invoker.host(B) black.host(C). 
+指纹1 和 指纹2 为应用识别指纹, 准确率越高越好. 黑指纹其实就是不会匹配任何应用的指纹，一般用较长的字符串代替即可. 分别用指纹1, 指纹2 和 黑指纹对内网主机探测统计, 获取三个主机列表: jmx-console.host(A)    invoker.host(B)    black.host(C). 
 
 Host = (A∩B) –(A∩B∩C) 即剔除jmx-console.host 和 invoker.host中存在于black.host的主机, 然后对jmx-console和invoker.host的主机取交集.
 
 2. 攻击Payload
+
 针对不用的应用我们需要加载不同的Payload, 但是大多数的攻击都是需要和Payload Result进行交互的. 这类Payload是没有办法用在此处的, 我们需要的是不需要和Payload Result进行交互的Payload. 我可以想到的两种应用比较广泛的Payload有JBOSS和Struts2漏洞.
 
 JBoss Payload:
@@ -49,7 +52,8 @@ Struts2 Payload:
 Struts2漏洞的影响大家都懂的, 通过URL直接远程命令执行, 想打那里就打那里.
 
 3. Payload Result
-获取Payload Result是十分有必要的, 这里的Payload Result和非Bool型SSRF的Result不是一个意思. 对于Bool型SSRF, 服务器端返回的数据永远只有True和False, 我们是可以通过返回的True或者False来判断Payload的执行状态, 但是这样的判断标准是无法让人信服的. 能否有一种方法能够精确的判断Payload的执行状态,而且能够返回Payload Result. 对于Struts2我找到了一种可利用的方法
+
+获取Payload Result是十分有必要的, 这里的Payload Result和非Bool型SSRF的Result不是一个意思. 对于Bool型SSRF, 服务器端返回的数据永远只有True和False, 我们是可以通过返回的True或者False来判断Payload的执行状态, 但是这样的判断标准是无法让人信服的. 能否有一种方法能够精确的判断Payload的执行状态,而且能够返回Payload Result. 对于Struts2我找到了一种可利用的方法.
 
 #### 0x04 Struts2在Bool型SSRF中的利用
 
