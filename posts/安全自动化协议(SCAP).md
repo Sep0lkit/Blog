@@ -36,7 +36,7 @@ SCAP 是由美国国家标准与技术研究院(NIST)制定的一套安全规范
 
 简单翻译为: SCAP是结合社区可协作规范的产物. 因此SCAP不仅仅一套安全规范, 而且是一套可以实现安全落地的规范.
 
-![OSCAP](_static/imgs/1567836508520.png)
+![OSCAP](https://github.com/Sep0lkit/Blog/blob/master/posts/_static/imgs/1567836508520.png)
 
 ------
 
@@ -129,11 +129,11 @@ oscap oval eval --report redhat7-oval.html com.redhat.rhsa-RHEL7.xml
 
 **Console输出:**
 
-![1567868259299](_static/imgs/1567868259299.png)
+![1567868259299](https://github.com/Sep0lkit/Blog/blob/master/posts/_static/imgs/1567868259299.png)
 
 **HTML报表:**
 
-![1567868494515](_static/imgs/1567868494515.png)
+![1567868494515](https://github.com/Sep0lkit/Blog/blob/master/posts/_static/imgs/1567868494515.png)
 
 Class=path AND Result=true的表示系统上存在此漏洞, 以及漏洞对应的CVE和Title. 可以快速获取系统上存在漏洞的资产.
 
@@ -155,21 +155,19 @@ oscap info查看content文件, 我们可以选择不同的profile,  比如STIG�
 
 **Console输出:**
 
-![1567870993083](_static/imgs/1567870993083.png)
+![1567870993083](https://github.com/Sep0lkit/Blog/blob/master/posts/_static/imgs/1567870993083.png)
 
 **HTML报表:**
 
-![1567870887010](_static/imgs/1567870887010.png)
+![1567870887010](https://github.com/Sep0lkit/Blog/blob/master/posts/_static/imgs/1567870887010.png)
 
 Result=pass 表示此检测项通过, fail表示检测不通过, 如上面的"Disable SSH Access via Empty Passwords", 表示禁止空密码登陆SSH的检测未通过.  通过OSCAP可以快速检测系统是否符合安全基线标准.
 
 
 
-***以上完整的检测报告已上传, 访问地址:***
+***以上完整的检测报告已上传, 瞎咋地址:***
 
-[redhat7-oval.html](./_assets/scap/redhat7-oval.html)
-
-[redhat7-xccdf.html](./_assets/scap/redhat7-xccdf.html)
+[scap-introduce.zip](https://github.com/Sep0lkit/Blog/blob/master/posts/_assets/scap/scap-introduce.zip)
 
 ### **未完待续**
 
@@ -184,3 +182,4 @@ Result=pass 表示此检测项通过, fail表示检测不通过, 如上面的"Di
 
 
 
+**原创文章, 未经允许禁止转载.**
