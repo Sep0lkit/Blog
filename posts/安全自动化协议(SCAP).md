@@ -1,7 +1,3 @@
-作者: Sep0lkit
-
-文章索引: https://github.com/Sep0lkit/Blog/issues
-
 # 安全内容自动化协议(SCAP)
 
 - **SCAP简介**
@@ -190,5 +186,3 @@ Result=pass 表示此检测项通过, fail表示检测不通过, 如上面的"Di
 >
 
 
-
-**原创文章, 未经允许禁止转载.**

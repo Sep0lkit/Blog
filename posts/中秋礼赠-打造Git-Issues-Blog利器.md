@@ -43,5 +43,7 @@
 
 ​	**WYWIWYG**(What You Write Is What You Get), 所写即所得.  本地文章push到github后, 通过github action自动生成issues, 本地变更也会同步进行更新, 同时支持图片地址转化, 文章模板等功能.
 
-最初只是想给自己打造一个写作的利器, 没成想最后做出来一个github action功能, 既然这样就分享给大家.  具体使用方式见:  Git-Issues-Blog  https://github.com/Sep0lkit/git-issues-blog
+​	最初只是想给自己打造一个写作的利器, 没成想最后做出来一个github action功能, 既然这样就分享给大家.  具体使用方式见:  
+
+​	Git-Issues-Blog  https://github.com/Sep0lkit/git-issues-blog
 
