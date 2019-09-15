@@ -14,7 +14,7 @@
 
 基于以上问题, 很多人都选用github来作为博客系统. 使用github做博客的有使用github repository, 也有选择github issues的, 两者各有千秋.
 
-#### Github Repository:
+### Github Repository:
 
 **优点:**
 
@@ -26,7 +26,7 @@
 - 缺少索引分类功能
 - 无法互动评论
 
-**Github Issues:**
+### **Github Issues:**
 
 **优点:**
 
@@ -41,7 +41,7 @@
 
 ### Git-Issues-Blog
 
-**WYWIWYG**(What You Write Is What You Get), 所写即所得.  本地文章push到github后, 通过github action自动生成issues, 本地变更也会同步进行更新, 同时支持图片地址转化, 文章模板等功能.
+​	**WYWIWYG**(What You Write Is What You Get), 所写即所得.  本地文章push到github后, 通过github action自动生成issues, 本地变更也会同步进行更新, 同时支持图片地址转化, 文章模板等功能.
 
-最初只是想给自己打造一个写作的利器, 没成想最后做出来一个github action功能, 既然这样就分享给大家.  具体使用方式见:  [Git-Issues-Blog](https://github.com/Sep0lkit/git-issues-blog)  https://github.com/Sep0lkit/git-issues-blog
+最初只是想给自己打造一个写作的利器, 没成想最后做出来一个github action功能, 既然这样就分享给大家.  具体使用方式见:  Git-Issues-Blog  https://github.com/Sep0lkit/git-issues-blog
 
