@@ -1,3 +1,7 @@
+作者: Sep0lkit
+
+文章索引: https://github.com/Sep0lkit/Blog/issues
+
 # 安全内容自动化协议(SCAP)
 
 - **SCAP简介**
@@ -109,7 +113,7 @@ OpenSCAP是一个开源的SCAP实现, 包括扫描器(oscap/scap-workbench), 以
 **OpenSCAP安装**
 
 ```bash
-#按照openscap
+#安装openscap
 yum install openscap openscap-scanner
 oscap --version
 ```
@@ -148,7 +152,8 @@ yum install scap-security-guide
 
 #使用oscap进行配置合规检查
 oscap info /usr/share/xml/scap/ssg/content/ssg-rhel7-ds.xml
-oscap xccdf eval --profile  xccdf_org.ssgproject.content_profile_stig-rhel7-disa --report redhat7-xccdf.html  /usr/share/xml/scap/ssg/content/ssg-rhel7-ds.xml
+oscap xccdf eval --profile  xccdf_org.ssgproject.content_profile_stig-rhel7-disa \
+--report redhat7-xccdf.html  /usr/share/xml/scap/ssg/content/ssg-rhel7-ds.xml
 ```
 
 oscap info查看content文件, 我们可以选择不同的profile,  比如STIG规范或者PCI安全规范. 
@@ -171,14 +176,18 @@ Result=pass 表示此检测项通过, fail表示检测不通过, 如上面的"Di
 
 ### **未完待续**
 
-本文仅仅对SCAP做了简单介绍, 限于篇幅有限所以SCAP的其他功能特性无法一一说明, 其实SCAP能做的还由很多:
+本文仅仅对SCAP做了简单介绍, 限于篇幅有限所以SCAP的其他功能特性无法一一说明, 其实SCAP能做的还有很多:
 
 - 自动化修复
 - 自定义content
-- 远程评估
-- 资产初始化安全配置
+- 初始化安全配置
 
 ## 参考链接:
+
+> - https://www.open-scap.org/getting-started/
+> - https://blog.csdn.net/langkew/article/details/8795530
+> - https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/chap-compliance_and_vulnerability_scanning
+>
 
 
 
