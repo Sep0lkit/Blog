@@ -57,4 +57,4 @@
 
 ​	Git-Issues-Blog  https://github.com/Sep0lkit/git-issues-blog
 
-PS: 结合Typora只能说, 真香.
+PS: 本地结合Typora写文章, 真香.
