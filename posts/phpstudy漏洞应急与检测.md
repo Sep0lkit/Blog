@@ -43,15 +43,15 @@ phpStudy后门被公开后,  第一时间通过IOC提取了最近一年存在此
 
    php源代码中xmlrpc扩展定义: HTTP Header中存在"accept-Encoding: compress,gzip"
 
-   ![1569332856979](_static/imgs/1569332856979.png)
+   ![zend_module_entry](_static/imgs/1569332856979.png)
 
    xmlrpc.dll中xmlrpc_module_entry的定义:
 
-   ![1569332960425](_static/imgs/1569332960425.png)
+   ![xmlrpc_zend_module_entry](_static/imgs/1569332960425.png)
 
    劫持的函数为: "sub_100031F0" 和 "sub_10003710", 实际中 "sub_10003710"并未定义任何内容.
 
-   ![1569333091959](_static/imgs/1569333091959.png)
+   ![sub_10003710](_static/imgs/1569333091959.png)
 
 ​	
 
@@ -60,10 +60,14 @@ phpStudy后门被公开后,  第一时间通过IOC提取了最近一年存在此
 构造HTTP包,  可以看到触发后门的IOC特征.
 
 ```bash
-curl "http://192.168.8.30" -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36" -H "accept: text/html" -H "accept-Encoding: compress,gzip" -H "accept-language: en-US;q=0.9"
+curl "http://192.168.8.30" \
+-H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36" \
+-H "accept: text/html" \
+-H "accept-Encoding: compress,gzip" \
+-H "accept-language: en-US;q=0.9"
 ```
 
-<img src="_static/imgs/1569309358921.png" alt="1569309358921" style="zoom: 50%;" />
+![xmlrpc_ioc](_static/imgs/1569309358921.png)
 
 **SYSMON触发的DNS Query:**
 
