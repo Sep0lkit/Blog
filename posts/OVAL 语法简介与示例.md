@@ -113,13 +113,13 @@ OVAL应用的场景包括漏洞/资产/配置, 实际中OVAL主要用于漏洞�
    </metadata>
    <criteria operator="AND">
     <criteria operator="OR">
-     <criterion comment="Red Hat Enterprise Linux 7 Client is installed" test_ref="oval:com.redhat.rhsa:tst:20140675001"/>
-     <criterion comment="Red Hat Enterprise Linux 7 Server is installed" test_ref="oval:com.redhat.rhsa:tst:20140675002"/>
+     <criterion comment="" test_ref=""/>
+     <criterion comment="" test_ref=""/>
     </criteria>
     <criteria operator="OR">
      <criteria operator="AND">
-      <criterion comment="python is earlier than 0:2.7.5-77.el7_6" test_ref="oval:com.redhat.rhsa:tst:20190710005"/>
-      <criterion comment="python is signed with Red Hat redhatrelease2 key" test_ref="oval:com.redhat.rhsa:tst:20152101006"/>
+      <criterion comment="" test_ref=""/>
+      <criterion comment="" test_ref=""/>
      </criteria>
     </criteria>
    </criteria>   
