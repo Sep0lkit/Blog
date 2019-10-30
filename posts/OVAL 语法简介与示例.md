@@ -213,7 +213,7 @@ OVAL都是非常庞大的, 如红帽提供给的针对redhat7的OVAL定义多达
 
 参见: [com.redhat.rhsa-RHEL7-Demo.xml](https://github.com/Sep0lkit/Blog/tree/master/posts/_assets/oval-demo/com.redhat.rhsa-RHEL7-Demo.xml)
 
-规则可以解读为: 系统为Redhat7, 当python包的版本小于2.7.5-77.el7_6且使用redhatrelease2 key签名时, 则此defintion返回true.
+规则解读: 系统为Redhat7, 当python包的版本小于2.7.5-77.el7_6且使用redhatrelease2 key签名时, 则此definition返回true.
 
 ![1569940760019](_static/imgs/1569940760019.png)
 
