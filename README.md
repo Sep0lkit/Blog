@@ -1,4 +1,4 @@
-# Sep0lkit's Blog
+# 是非黑白·灰
 
 博文索引: [Issues](https://github.com/Sep0lkit/Blog/issues)
 
