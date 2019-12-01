@@ -111,9 +111,9 @@ Class=patch AND Result=true的表示系统上存在此漏洞, 以及漏洞对应
 
 ### **其他**
 
+- 使用oval-for-el存在一定的误报率, 是由于redhat和centos的rpm包名称并非都是完全保持一致
 - redhat开源一哥的地位真不是吹出来的, 对比其他家的oval你就知道redhat比他们强的不是一点.
 - redhat会校验软件包签名来降低误报率
-- 使用oval-for-el存在一定的误报率, 是由于redhat和centos的rpm包名称并非都是完全保持一致
 
 **企业改如何使用OVAL:**
 
