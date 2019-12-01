@@ -1,1 +1,0 @@
-# 使用 OVAL 检测 Redhat/CentOS 软件漏洞
