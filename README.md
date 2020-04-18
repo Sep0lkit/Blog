@@ -1,4 +1,4 @@
-# 是非黑白·灰
+# 是非黑白·No!
 
 博文索引: [Issues](https://github.com/Sep0lkit/Blog/issues)
 
